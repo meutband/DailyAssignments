@@ -5,10 +5,8 @@ import matplotlib.pyplot as plt
 ## Linear Regression Problem
 
 '''
-
 1. Load the data into a dataframe from `data/balance.csv`.
 Make a scatter matrix of the variables.
-
 '''
 
 data = pd.read_csv('data/balance.csv', index_col=0)
@@ -30,11 +28,9 @@ print data['Married'].unique()
 print data['Ethnicity'].unique()
 
 '''
-
 2. Convert Gender, Student and Married to 1/0. Create dummy variables for the
 Ethnicity column (pd.get_dummies()). After you create the model, drop the
 African American dummy variable.
-
 '''
 
 data['Gender'] = data['Gender'].map({' Male':1, 'Female':0})
@@ -47,11 +43,9 @@ del data['Ethnicity_African American']
 print data.info()
 
 '''
-
 3. Using all the feature variables, fit a linear regression model to predict
 `Balance`. Make a residual plot by plotting the fitted y values against the
 studentized residuals.
-
 '''
 
 x = data.copy()
@@ -67,10 +61,8 @@ plt.scatter(y_pred, resids, label='Residual Plot')
 plt.savefig('images2/all_model_residuals.png')
 
 '''
-
 4. Try a few other models by excluding some features from the full model.
 Does the residual plot change?
-
 '''
 
 # Function that will fit and plot the model for any given x/y
@@ -98,11 +90,9 @@ y.hist(bins=100)
 plt.show()
 
 '''
-
 5. Re-plot the univariate scatter plot on a bigger figure size. Look for
 variable(s) that can differentiate most zero balance observation from non-zero
 balance observations.
-
 '''
 
 # Plots each column to find threshold limits to limit $0 for Balancec
@@ -116,11 +106,9 @@ for col in all_columns:
 
 
 '''
-
 6. Remove the data points below the decided threshold of your chosen variable
 and examine the number of zero observations that remain. Now re-fit the same
 model and examine the residuals.
-
 '''
 
 cond1 = data['Limit'] >= 2500
@@ -147,9 +135,7 @@ plt.savefig('images2/new_model_residuals.png')
 ## Extra Credit
 
 '''
-
 1. Fit a linear model to predict `Balance` using `Income` as a predictor.
-
 '''
 
 y = new_data['Balance']
@@ -160,9 +146,7 @@ print income_model.summary()
 
 
 '''
-
 2. Fit a second model using `Income` and `Student` as predictors.
-
 '''
 
 x = new_data[['Income', 'Student']]
@@ -172,10 +156,8 @@ print inc_stu_model.summary()
 
 
 '''
-
 3. Finally fit a model using `Income`, `Student`, and `Income`*`Student`
 to account for a possible interaction
-
 '''
 
 new_data['Income*Student'] = new_data['Income'] * new_data['Student']
@@ -185,9 +167,7 @@ inc_stu_model = sm.OLS(y,x).fit()
 print inc_stu_model.summary()
 
 '''
-
 4. Make a single plot with two regression lines, one for Student and one for non-Students.
-
 '''
 
 students = new_data['Student'] == 1
