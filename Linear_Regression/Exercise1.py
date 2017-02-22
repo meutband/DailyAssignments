@@ -14,11 +14,9 @@ credit_card = sm.datasets.ccard.load_pandas().data
 ## Part 1: Linear Regression Diagnostics
 
 '''
-
 1. Explore the dataset with a scatter_matrix and a boxplot. Fit a linear
 regression model to each of the datasets. Print and examine the summaries of
 the models.
-
 '''
 
 #Scatter Matrix
@@ -66,9 +64,7 @@ print summary2
 
 
 '''
-
 2. Plot the studentized residuals against the fitted y-values.
-
 '''
 
 res1 = prest_model.outlier_test()['student_resid']
@@ -90,10 +86,8 @@ plt.savefig('images1/credit_residuals.png')
 
 
 '''
-
 3. Take the log of `AVGEXP` in `credit card` data. Re-fit the model,re-plot the
 residuals.
-
 '''
 
 #Prestige Log
@@ -121,9 +115,7 @@ plt.savefig('images1/logcredit_residuals.png')
 
 
 '''
-
 4. Make Q-Q plots for the studentized residuals of the `prestige` and `credit card`.
-
 '''
 
 sm.graphics.qqplot(res1, line='45', fit=True)
@@ -136,10 +128,8 @@ sm.graphics.qqplot(res2_log, line='45', fit=True)
 plt.savefig('images1/credit2_qqplot.png')
 
 '''
-
 5. Use the Variance Inflation Factor (VIF) to measure how collinear a
 particular feature is with the rest of the features. (VIF > 10)
-
 '''
 
 #Prestige
@@ -162,10 +152,8 @@ print credit_vif
 #Use of prestige dataset only the rest of assignment
 
 '''
-
 1. Plot (plotly) your residual plot for the prestige dataset. Identify and note
 the points that are more than 2 / -2 studentized residuals.
-
 '''
 
 trace = go.Scatter(
@@ -179,11 +167,9 @@ data = [trace]
 py.image.save_as({'data':data}, 'images1/inc_v_edu_iplot', format='png')
 
 '''
-
 2. Plot (plotly) the x-variables (income and education respectively) against
 the studentized residuals. Examine the outliers you have identified in `1`
 in the plots and explain why the points are identified as outliers
-
 '''
 trace1 = go.Scatter(
     x = x1['income'],
@@ -203,20 +189,16 @@ py.image.save_as({'data':data}, 'images1/prest_iplot', format='png')
 
 
 '''
-
 3. Make an influence plot and identify the outliers, the influential points,
 and the outliers with high influence.
-
 '''
 
 smg.influence_plot(prest_model)
 plt.savefig('images1/influence_plot.png')
 
 '''
-
 4. Remove the influential (high leverage) points identified in `3` and re-fit
 the model.
-
 '''
 prestige = prestige.drop(['conductor', 'RR.engineer', 'minister'])
 
