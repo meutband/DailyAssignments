@@ -11,20 +11,16 @@ from itertools import izip
 grad = pd.read_csv('data/grad.csv')
 
 '''
-
 1. Get some preliminary summary statistics on the data. In particular look at
 the mean values of the features.
-
 '''
 
 print grad.describe()
 
 
 '''
-
 2. See how many applicants from each rank of school were accepted. (Use crosstab).
 Make a bar plot of the percent of applicants from each rank who were accepted.
-
 '''
 
 cross = pd.crosstab(grad['admit'], grad['rank'])
@@ -35,9 +31,7 @@ plt.savefig('images/avg_accepted_rank.png')
 
 
 '''
-
 3. Run a logistic regression model, and look at the results. (With statsmodels)
-
 '''
 
 x = grad[['gre', 'gpa', 'rank']].values
@@ -51,10 +45,8 @@ print logit_model.summary()
 
 
 '''
-
 4. Use KFolds cross validation to get the average accuracies, precisions, and
 recalls of a LogisticRegression model.
-
 '''
 
 kfold = KFold(n_splits=3)
@@ -78,10 +70,8 @@ print 'Average Precision: ', np.mean(precisions)
 print 'Average Recall: ', np.mean(recalls)
 
 '''
-
 5. Create binary indicator varaibles for 'rank'. Redo accuracy, recal, and
 precision scores to compare (to part 4).
-
 '''
 
 rank = pd.get_dummies(grad['rank'], prefix='rank')
@@ -109,9 +99,7 @@ print 'Average Recall: ', np.mean(recalls)
 # Worse than before
 
 '''
-
 6. Make a plot of the ROC curve (using your function defined in part 4)
-
 '''
 
 X_train, X_test, y_train, y_test = train_test_split(x, y)
@@ -131,9 +119,7 @@ plt.savefig('images/roc_curve.png')
 
 
 '''
-
 7. Fit a Logistic model on the data. What are the beta coefficients?
-
 '''
 
 x = grad[['gre', 'gpa', 'rank']]
@@ -147,9 +133,7 @@ for name, coef in izip(x.columns, model.coef_[0]):
 
 
 '''
-
 8. Compute the change in odds ration from one unit change in each feature
-
 '''
 
 
@@ -162,9 +146,7 @@ for name, coef in izip(x.columns, model.coef_[0]):
 
 
 '''
-
 9. What change is required to double my chances of admission?
-
 '''
 
 for name, coef in izip(x.columns, model.coef_[0]):
