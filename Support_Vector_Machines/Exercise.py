@@ -216,7 +216,7 @@ s = SVC(kernel='poly')
 g = GridSearchCV(s, {'C':np.linspace(.001, 3, 20), 'degree':[1,2,3,4]}, cv=10).fit(x_train,y_train)
 print g.best_params_ # {'C': 0.31668421052631579, 'degree': 1}
 print g.score(x_test, y_test) # 0.935483870968
-decision_boundary(g.best_estimator_, x_train, y_train, 'Best Poly')
+decision_boundary(g.best_estimator_, x_train, y_train, 'Best_Poly')
 
 '''
 2. Perform GridSearchCV for an RBF Kernel with varying hyperparameters and
@@ -227,4 +227,4 @@ s = SVC(kernel='rbf')
 g = GridSearchCV(s, {'C':np.linspace(.001, 3, 20), 'gamma':np.linspace(0,5,20)}, cv=10).fit(x_train,y_train)
 print g.best_params_ # {'C': 0.1588421052631579, 'gamma': 0.26315789473684209}
 print g.score(x_test, y_test) # 0.967741935484
-decision_boundary(g.best_estimator_, x_train, y_train, 'Best RBF')
+decision_boundary(g.best_estimator_, x_train, y_train, 'Best_RBF')
