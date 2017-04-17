@@ -1,4 +1,4 @@
-Connecting to the database
+#Connecting to the database
 
 1. First create the database socialmedia:
 
@@ -118,7 +118,7 @@ socialmedia=# \d test_group
  grp    | character varying |
 `
 
-### Write Some SQL Queries
+# Write Some SQL Queries
 
 1. Get the number of users who have registered each day, ordered by date.
 
@@ -295,8 +295,8 @@ socialmedia-# ON message_lengths.usr=a.usr AND message_lengths.cnt=a.max_cnt ORD
    ...
 `
 
-Extra Credit
-========================
+#Extra Credit
+
 8. Write a query which gets each user, the number of friends and the number of messages received.
 
 ###Creates new tables
