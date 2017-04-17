@@ -1,4 +1,4 @@
-## Connecting to the database
+Connecting to the database
 
 1. First create the database socialmedia:
 
