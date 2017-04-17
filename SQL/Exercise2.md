@@ -295,11 +295,11 @@ socialmedia-# ON message_lengths.usr=a.usr AND message_lengths.cnt=a.max_cnt ORD
    ...
 `
 
-#Extra Credit
+# Extra Credit
 
 8. Write a query which gets each user, the number of friends and the number of messages received.
 
-###Creates new tables
+### Creates new tables
 socialmedia=# CREATE TABLE friends_and_messages AS
 socialmedia-# WITH cleaned_friends AS (
 socialmedia(# (SELECT userid1, userid2 FROM friends) UNION (SELECT userid2, userid1 FROM friends))
@@ -309,7 +309,7 @@ socialmedia(# FROM cleaned_friends GROUP BY userid1) f
 socialmedia-# JOIN (SELECT recipient AS userid, COUNT(1) AS messages
 socialmedia(# FROM messages GROUP BY recipient) m ON f.userid=m.userid;
 
-###Runs table
+### Runs table
 socialmedia=# SELECT * FROM friends_and_messages;
 
 ` userid | friends | messages
@@ -330,7 +330,7 @@ socialmedia=# SELECT * FROM friends_and_messages;
 
 9. Break the users into 10 cohorts based on their number of friends and get the average number of messages for each group.
 
-###Get max of number of friends
+### Get max of number of friends
 socialmedia=# SELECT MAX(friends) FROM friends_and_messages;
 
 ### Cohort groupings are (1)0-4, (2)5-9, (3)10-14, (4)15-19,
