@@ -1,29 +1,16 @@
-Goals
-======================
-   1. Explore the Database
-   2. Basic Querying - Selecting From Tables
-   3. Selecting specific attributes of a table
-   4. Where clause/ filtering
-   5. Aggregation functions: counting
-   6. Aggregation functions: AVG
-   7. Intervals, Ranges, and sorting
-   8. Subqueries
+## Loading the database
 
-
-Loading the database
-======================
-
-#Open postgres
+#### Open postgres
 Marks-MBP:sql meutband$ psql
 psql (9.5.3)
 Type "help" for help.
 
-#Create Database readychef
+#### Create Database readychef
 meutband=# CREATE DATABASE readychef;
 CREATE DATABASE
 meutband=# \q
 
-#Find database and import the database
+#### Find database and import the database
 Marks-MBP:sql meutband$ cd data
 Marks-MBP:data meutband$ psql readychef < readychef.sql
 
@@ -59,12 +46,11 @@ GRANT
 GRANT
 `
 
-#Enter postgress prompt for database readychef
+### Enter postgress prompt for database readychef
 Marks-MBP:data meutband$ psql readychef
 
 
-Basic Exploration
-=================
+## Basic Exploration
 
 1. What are the tables in our database?
 
@@ -133,8 +119,7 @@ readychef=# \d visits
  userid | integer |
 `
 
-Select statements
-===================
+## Select statements
 
 1. To get an understanding of the data, run a [SELECT] statement on each table.
 Keep all the columns and limit the number of rows to 10.
@@ -247,7 +232,7 @@ readychef=# SELECT userid FROM users;
 `
 
 3. Maybe you're just interested in what the campaign ids are.
-# Note: Pinterest=PI, Facebook=FB, Twitter=TW, and Reddit=RE
+##### Note: Pinterest=PI, Facebook=FB, Twitter=TW, and Reddit=RE
 
 readychef=# SELECT DISTINCT campaign_id FROM users;
 
@@ -260,8 +245,7 @@ readychef=# SELECT DISTINCT campaign_id FROM users;
 (4 rows)
 `
 
-Where Clauses / Filtering
-========================================
+## Where Clauses / Filtering
 
 1. Write a new `SELECT` statement that returns all rows where `Campaign_ID` is equal to `FB`.
 
@@ -301,8 +285,7 @@ readychef=# SELECT userid, dt FROM users WHERE campaign_id = 'FB';
           ...
 `
 
-Aggregation Functions
-=======================
+## Aggregation Functions
 
 1. Write a query to get the count of just the users who came from Facebook.
 
@@ -441,7 +424,8 @@ readychef=# GROUP BY type, month;
 
 readychef=# SELECT meal_id, SUM(CASE WHEN event='bought' THEN 1 ELSE 0 END) as bought,                                   
 readychef=# SUM(CASE WHEN event='like' THEN 1 ELSE 0 END) as liked,
-readychef=# SUM(CASE WHEN event='share' THEN 1 ELSE 0 END) as shared                                                       readychef=# FROM events                                                                                                 
+readychef=# SUM(CASE WHEN event='share' THEN 1 ELSE 0 END) as shared
+readychef=# FROM events                     
 readychef=# GROUP BY meal_id;
 
 ` meal_id | bought | liked | shared
@@ -465,8 +449,7 @@ readychef=# GROUP BY meal_id;
     ...
 `
 
-Sorting
-==========================================
+## Sorting
 
 1. Let's start with a query which gets the average price for each type.
 
@@ -535,8 +518,7 @@ readychef=# SELECT meal_id, type, price FROM meals ORDER BY type, price;
     ...
 `
 
-Joins
-=========================
+## Joins
 
 1. Write a query to get one table that joins the `events` table with the `users` table (on `userid`).
 
@@ -604,8 +586,7 @@ readychef-# GROUP BY type;
 (6 rows)
 `
 
-Subqueries
-================================
+## Subqueries
 
 1. Write a query to get meals that are above the average meal price.
 
@@ -686,15 +667,14 @@ readychef-# FROM users GROUP BY campaign_id;
 (4 rows)
 `
 
-Extra Credit
-========================
+## Extra Credit
 
 1. What user from each campaign bought the most items?
 
 readychef=# WITH user_campaign_count AS (
 readychef=# SELECT campaign_id, users.userid, COUNT(1) AS cnt FROM users
 readychef=# JOIN events on users.userid=events.userid GROUP BY campaign_id, users.userid)
-# Finishes user_campaign_count, start to draw from user_campaign_count
+##### Finishes user_campaign_count, start to draw from user_campaign_count
 
 readychef=# SELECT u.campaign_id, u.userid, u.cnt
 readychef=# FROM user_campaign_count u
